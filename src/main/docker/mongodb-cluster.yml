@@ -1,0 +1,16 @@
+version: '2'
+services:
+  dhi_alumni-mongodb:
+    image: mongo:4.0.13
+    ports:
+      - '27017:27017'
+    command: mongos --configdb dhi_alumni-mongodb-config
+  dhi_alumni-mongodb-node:
+    build:
+      context: .
+      dockerfile: mongodb/MongoDB.Dockerfile
+    command: mongod --replSet rs1 --noprealloc --smallfiles
+  dhi_alumni-mongodb-config:
+    image: mongo:4.0.13
+    container_name: dhi_alumni-mongodb-config
+    command: mongod --noprealloc --smallfiles --configsvr --dbpath /data/db

@@ -1,0 +1,39 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.heraizen.dhi.alumni"
+    },
+    "jhipsterVersion": "6.5.0",
+    "applicationType": "monolith",
+    "baseName": "dhi_alumni",
+    "packageName": "com.heraizen.dhi.alumni",
+    "packageFolder": "com/heraizen/dhi/alumni",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": false,
+    "websocket": "spring-websocket",
+    "databaseType": "mongodb",
+    "devDatabaseType": "mongodb",
+    "prodDatabaseType": "mongodb",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "gradle",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "ODg5N2RhMWMxYjU0OGEwNTMwMDg4NGJlNTFlYzA1ZGVhYjI4ZDljM2RhYjYzZTQxOTNlZmZhYTNhZDY1NGFlNmY0Y2IxOTY4MzcxODg1OGEzNzBiM2JhOWM5MmI3MGYyOTUzYTIyZjViYThjMzFjNzkyY2VkOWE1N2IxYjQ1MGU=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "none",
+    "clientThemeVariant": "",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "blueprints": []
+  }
+}
