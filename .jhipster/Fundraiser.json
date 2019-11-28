@@ -1,0 +1,55 @@
+{
+    "name": "Fundraiser",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "targetAmount",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "collectedAmount",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "lastDateToContribute",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "FundraiseStatus",
+            "fieldValues": "ACHIEVED,YET_TO_ACHIEVE"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "fundContribution",
+            "otherEntityRelationshipName": "fundraiser",
+            "relationshipName": "fundContribution"
+        }
+    ],
+    "changelogDate": "20191124143610",
+    "javadoc": "The Fundraiser entity.\\n@author Shreekantha",
+    "entityTableName": "fundraiser",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

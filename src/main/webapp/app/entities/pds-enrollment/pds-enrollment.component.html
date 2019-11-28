@@ -1,0 +1,96 @@
+<div>
+    <h2 id="page-heading">
+        <span>My PDS Enrollments</span>
+        <!-- <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-pds-enrollment" [routerLink]="['/pds-enrollment/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create a new Pds Enrollment
+            </span>
+        </button> -->
+    </h2>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="pdsEnrollments?.length === 0">
+        <span>No PDS Enrollments found</span>
+    </div>
+    <div class="table-responsive" *ngIf="pdsEnrollments?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <!-- <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
+            <!-- <th scope="col"  jhiSortBy="remarks"><span>Remarks</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
+           
+            <th scope="col"  ><span>PDS Service</span></th>
+            <th scope="col"  ><span>Faculty</span> <fa-icon [icon]="'sort'"></fa-icon></th> 
+            <th scope="col"  ><span>date</span> </th>
+            <th scope="col"  ><span>time</span> </th>
+            <th scope="col"  ><span>venue</span> </th>
+           
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let pdsEnrollment of pdsEnrollments ;trackBy: trackId">
+                <!-- <td><a [routerLink]="['/pds-enrollment', pdsEnrollment.id, 'view' ]">{{pdsEnrollment.id}}</a></td> -->
+                <td>
+                    {{pdsEnrollment.pdsName}}
+                </td>
+                <td>
+                    {{pdsEnrollment.faculty}}
+                </td>
+                <td>
+                    {{pdsEnrollment.enrolledTo.date}}
+                </td>
+                <td>
+                    {{pdsEnrollment.enrolledTo.time}}
+                </td>
+                <td>
+                    {{pdsEnrollment.enrolledTo.venue}}
+                </td>
+                <!-- <td>{{pdsEnrollment.remarks}}</td> -->
+                <!-- <td>
+                    {{pdsEnrollment.enrolledByFirstName}}
+                </td>
+                <td>
+                    <div *ngIf="pdsEnrollment.enrolledToId">
+                        <a [routerLink]="['/pds-schedule', pdsEnrollment.enrolledToId , 'view' ]" >{{pdsEnrollment.enrolledToId}}</a>
+                    </div>
+                </td> -->
+                <td class="text-right">
+                    <div class="btn-group">
+                        <!-- <button type="submit"
+                                [routerLink]="['/pds-enrollment', pdsEnrollment.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/pds-enrollment', pdsEnrollment.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button> -->
+                        <button type="submit"
+                                [routerLink]="['/pds-enrollment', { outlets: { popup: pdsEnrollment.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Unenroll</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div [hidden]="pdsEnrollments?.length === 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

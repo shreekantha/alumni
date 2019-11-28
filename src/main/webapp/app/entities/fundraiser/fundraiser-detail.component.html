@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="fundraiser">
+            <h2><span>Fundraiser</span> {{fundraiser.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Name</span></dt>
+                <dd>
+                    <span>{{fundraiser.name}}</span>
+                </dd>
+                <dt><span>Description</span></dt>
+                <dd>
+                    <span>{{fundraiser.description}}</span>
+                </dd>
+                <dt><span>Target Amount</span></dt>
+                <dd>
+                    <span>{{fundraiser.targetAmount}}</span>
+                </dd>
+                <dt><span>Collected Amount</span></dt>
+                <dd>
+                    <span>{{fundraiser.collectedAmount}}</span>
+                </dd>
+                <dt><span>Last Date To Contribute</span></dt>
+                <dd>
+                    <span>{{fundraiser.lastDateToContribute}}</span>
+                </dd>
+                <dt><span>Status</span></dt>
+                <dd>
+                    <span>{{fundraiser.status}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/fundraiser', fundraiser.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

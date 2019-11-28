@@ -1,0 +1,38 @@
+{
+    "name": "PdsCourseTopic",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "duration",
+            "fieldType": "Duration"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "pdsCourse",
+            "otherEntityRelationshipName": "pdsCourseTopic",
+            "relationshipValidateRules": "required",
+            "relationshipName": "pdsCourse",
+            "otherEntityField": "courseName"
+        }
+    ],
+    "changelogDate": "20191124143608",
+    "javadoc": "The PdsCourseTopic entity.\\n@author Shreekantha",
+    "entityTableName": "pds_course_topic",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

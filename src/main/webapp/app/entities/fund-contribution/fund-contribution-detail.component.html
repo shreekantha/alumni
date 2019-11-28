@@ -1,0 +1,45 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="fundContribution">
+            <h2><span>Fund Contribution</span> {{fundContribution.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Currency</span></dt>
+                <dd>
+                    <span>{{fundContribution.currency}}</span>
+                </dd>
+                <dt><span>Contr Amount</span></dt>
+                <dd>
+                    <span>{{fundContribution.contrAmount}}</span>
+                </dd>
+                <dt><span>Contr Date</span></dt>
+                <dd>
+                    <span>{{fundContribution.contrDate}}</span>
+                </dd>
+                <dt><span>Contibutor</span></dt>
+                <dd>
+                    {{fundContribution.contibutorFirstName}}
+                </dd>
+                <dt><span>Fundraiser</span></dt>
+                <dd>
+                    <div *ngIf="fundContribution.fundraiserId">
+                        <a [routerLink]="['/fundraiser', fundContribution.fundraiserId, 'view']">{{fundContribution.fundraiserName}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/fund-contribution', fundContribution.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

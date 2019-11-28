@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="pdsCourse">
+            <h2><span>Pds Course</span> {{pdsCourse.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Course Name</span></dt>
+                <dd>
+                    <span>{{pdsCourse.courseName}}</span>
+                </dd>
+                <dt><span>Description</span></dt>
+                <dd>
+                    <span>{{pdsCourse.description}}</span>
+                </dd>
+                <dt><span>Prof Dev Service</span></dt>
+                <dd>
+                    <div *ngIf="pdsCourse.profDevServiceId">
+                        <a [routerLink]="['/prof-dev-service', pdsCourse.profDevServiceId, 'view']">{{pdsCourse.profDevServiceName}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/pds-course', pdsCourse.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

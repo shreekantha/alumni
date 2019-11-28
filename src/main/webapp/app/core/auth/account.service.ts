@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject, of } from 'rxjs';
-import { shareReplay, tap, catchError } from 'rxjs/operators';
-
+import { Injectable } from '@angular/core';
 import { SERVER_API_URL } from 'app/app.constants';
 import { Account } from 'app/core/user/account.model';
+import { Observable, of, Subject } from 'rxjs';
+import { catchError, shareReplay, tap } from 'rxjs/operators';
 import { JhiTrackerService } from '../tracker/tracker.service';
+
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -14,7 +14,7 @@ export class AccountService {
   private authenticationState = new Subject<any>();
   private accountCache$: Observable<Account>;
 
-  constructor(private http: HttpClient, private trackerService: JhiTrackerService) {}
+  constructor(private http: HttpClient, private trackerService: JhiTrackerService) { }
 
   fetch(): Observable<Account> {
     return this.http.get<Account>(SERVER_API_URL + 'api/account');
@@ -58,6 +58,8 @@ export class AccountService {
         tap(account => {
           if (account) {
             this.userIdentity = account;
+            console.error('account identity ', account.id)
+            sessionStorage.setItem('user-id', account.id);
             this.authenticated = true;
             this.trackerService.connect();
           } else {
@@ -86,5 +88,10 @@ export class AccountService {
 
   getImageUrl(): string {
     return this.isIdentityResolved() ? this.userIdentity.imageUrl : null;
+  }
+
+
+  static getUserId(): string {
+    return sessionStorage.getItem('user-id');
   }
 }

@@ -1,0 +1,53 @@
+{
+    "name": "FundContribution",
+    "fields": [
+        {
+            "fieldName": "currency",
+            "fieldType": "Currency",
+            "fieldValues": "INR,USD",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "contrAmount",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "contrDate",
+            "fieldType": "Instant"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "fundContribution",
+            "relationshipValidateRules": "required",
+            "relationshipName": "contibutor",
+            "otherEntityField": "firstName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "fundraiser",
+            "otherEntityRelationshipName": "fundContribution",
+            "relationshipValidateRules": "required",
+            "relationshipName": "fundraiser",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20191124143611",
+    "javadoc": "The FundContribution entity.\\n@author Shreekantha",
+    "entityTableName": "fund_contribution",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

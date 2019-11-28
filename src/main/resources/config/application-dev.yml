@@ -30,13 +30,13 @@ spring:
     restart:
       enabled: true
     livereload:
-      enabled: false # we use Webpack dev server + BrowserSync for livereload
+      enabled: true # we use Webpack dev server + BrowserSync for livereload
   jackson:
     serialization:
       indent-output: true
   data:
     mongodb:
-      uri: mongodb://localhost:27017
+      uri: mongodb://aludhdmni:Oxn729shnp43zI@88.99.143.82:47118/dhi_alumni
       database: dhi_alumni
   mail:
     host: localhost
@@ -50,6 +50,8 @@ spring:
 
 server:
   port: 8080
+  servlet:
+    context-path: /dhialumni
 
 # ===================================================================
 # JHipster specific properties

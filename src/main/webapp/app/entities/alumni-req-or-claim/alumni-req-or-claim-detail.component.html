@@ -1,0 +1,53 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="alumniReqOrClaim">
+            <h2><span>Alumni Req Or Claim</span> {{alumniReqOrClaim.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Request For</span></dt>
+                <dd>
+                    <span>{{alumniReqOrClaim.requestFor}}</span>
+                </dd>
+                <dt><span>Reason</span></dt>
+                <dd>
+                    <span>{{alumniReqOrClaim.reason}}</span>
+                </dd>
+                <dt><span>Status</span></dt>
+                <dd>
+                    <span>{{alumniReqOrClaim.status}}</span>
+                </dd>
+                <dt><span>Requested Date</span></dt>
+                <dd>
+                    <span>{{alumniReqOrClaim.requestedDate}}</span>
+                </dd>
+                <dt><span>Request By</span></dt>
+                <dd>
+                    {{alumniReqOrClaim.requestByFirstName}}
+                </dd>
+                <dt><span>Assignee</span></dt>
+                <dd>
+                    {{alumniReqOrClaim.assigneeFirstName}}
+                </dd>
+                <dt><span>Subject</span></dt>
+                <dd>
+                    <div *ngIf="alumniReqOrClaim.subjectId">
+                        <a [routerLink]="['/req-or-claim-subject', alumniReqOrClaim.subjectId, 'view']">{{alumniReqOrClaim.subjectName}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <!-- <button type="button"
+                    [routerLink]="['/alumni-req-or-claim', alumniReqOrClaim.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button> -->
+        </div>
+    </div>
+</div>

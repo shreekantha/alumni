@@ -1,0 +1,97 @@
+<div>
+    <h2 id="page-heading">
+        <span>PDS Schedules</span>
+        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-pds-schedule"
+            [routerLink]="['/pds-schedule/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span>
+                PDS Schedule
+            </span>
+        </button>
+    </h2>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <br />
+    <div class="alert alert-warning" *ngIf="pdsSchedules?.length === 0">
+        <span>No pdsSchedules found</span>
+    </div>
+    <div class="table-responsive" *ngIf="pdsSchedules?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                    <!-- <th scope="col" jhiSortBy="id"><span>ID</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th> -->
+                    <th scope="col" jhiSortBy="profDevServiceName"><span>Prof Dev Service</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="duration"><span>Duration</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="date"><span>Date</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="time"><span>Time</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="venue"><span>Venue</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="remarks"><span>Remarks</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pdsSchedule of pdsSchedules ;trackBy: trackId">
+                    <!-- <td><a [routerLink]="['/pds-schedule', pdsSchedule.id, 'view' ]">{{pdsSchedule.id}}</a></td> -->
+                    <td>
+                        <div *ngIf="pdsSchedule.profDevServiceId">
+                            <a [routerLink]="['/prof-dev-service', pdsSchedule.profDevServiceId , 'view' ]">{{pdsSchedule.profDevServiceName}}</a>
+                        </div>
+                    </td>
+                    <td>{{pdsSchedule.duration}}</td>
+                    <td>{{pdsSchedule.date | date:'mediumDate'}}</td>
+                    <td>{{pdsSchedule.time | date:'medium'}}</td>
+                    <td>{{pdsSchedule.venue}}</td>
+                    <td>{{pdsSchedule.remarks}}</td>
+
+                    <td class="text-right">
+                        <div *jhiHasAnyAuthority="'ROLE_ADMIN'" class="btn-group">
+                            <button type="submit" [routerLink]="['/pds-schedule', pdsSchedule.id, 'view' ]" class="btn btn-info btn-sm">
+                                <fa-icon [icon]="'eye'"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+                            <button type="submit" [routerLink]="['/pds-schedule', pdsSchedule.id, 'edit']" class="btn btn-primary btn-sm">
+                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+                            <button type="submit" [routerLink]="['/pds-schedule', { outlets: { popup: pdsSchedule.id + '/delete'} }]"
+                                replaceUrl="true" queryParamsHandling="merge" class="btn btn-danger btn-sm">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                        <div *jhiHasAnyAuthority="'ROLE_ALUMNI'">
+                            <button type="button" (click)="enrollToPds(pdsSchedule.id)" class="btn btn-primary btn-sm">
+                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                <span class="d-none d-md-inline">Enroll</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div [hidden]="pdsSchedules?.length === 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5"
+                [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

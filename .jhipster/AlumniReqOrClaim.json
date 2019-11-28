@@ -1,0 +1,59 @@
+{
+    "name": "AlumniReqOrClaim",
+    "fields": [
+        {
+            "fieldName": "requestFor",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "reason",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "ReqOrClaimStatus",
+            "fieldValues": "SUBMITTED,PROCESSING,ISSUED"
+        },
+        {
+            "fieldName": "requestedDate",
+            "fieldType": "Instant"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "alumniReqOrClaim",
+            "relationshipValidateRules": "required",
+            "relationshipName": "requestBy",
+            "otherEntityField": "firstName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "alumniReqOrClaim",
+            "relationshipValidateRules": "required",
+            "relationshipName": "assignee",
+            "otherEntityField": "firstName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "reqOrClaimSubject",
+            "otherEntityRelationshipName": "alumniReqOrClaim",
+            "relationshipValidateRules": "required",
+            "relationshipName": "subject",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20191124143613",
+    "javadoc": "The AlumniRequest entity.\\n@author Shreekantha",
+    "entityTableName": "alumni_req_or_claim",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

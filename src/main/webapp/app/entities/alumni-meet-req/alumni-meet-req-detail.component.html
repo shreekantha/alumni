@@ -1,0 +1,62 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="alumniMeetReq">
+            <h2><span>Alumni Meet Req</span> {{alumniMeetReq.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>About Me</span></dt>
+                <dd>
+                    <span>{{alumniMeetReq.aboutMe}}</span>
+                </dd>
+                <dt><span>Description</span></dt>
+                <dd>
+                    <span>{{alumniMeetReq.description}}</span>
+                </dd>
+                <dt><span>Document</span></dt>
+                <dd>
+                    <div *ngIf="alumniMeetReq.document">
+                        <a (click)="openFile(alumniMeetReq.documentContentType, alumniMeetReq.document)">open</a>
+                        {{alumniMeetReq.documentContentType}}, {{byteSize(alumniMeetReq.document)}}
+                    </div>
+                </dd>
+                <dt><span>Status</span></dt>
+                <dd>
+                    <span>{{alumniMeetReq.status}}</span>
+                </dd>
+                <dt><span>Request By</span></dt>
+                <dd>
+                    {{alumniMeetReq.requestByFirstName}}
+                </dd>
+                <dt><span>Request To</span></dt>
+                <dd>
+                    {{alumniMeetReq.requestToFirstName}}
+                </dd>
+                <dt><span>Topic</span></dt>
+                <dd>
+                    <div *ngIf="alumniMeetReq.topicId">
+                        <a [routerLink]="['/meet-req-topic', alumniMeetReq.topicId, 'view']">{{alumniMeetReq.topicName}}</a>
+                    </div>
+                </dd>
+                <dt><span>Aspired Role</span></dt>
+                <dd>
+                    <div *ngIf="alumniMeetReq.aspiredRoleId">
+                        <a [routerLink]="['/aspired-role', alumniMeetReq.aspiredRoleId, 'view']">{{alumniMeetReq.aspiredRoleName}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/alumni-meet-req', alumniMeetReq.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+{
+    "name": "PdsSchedule",
+    "fields": [
+        {
+            "fieldName": "duration",
+            "fieldType": "Duration",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "date",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "time",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "venue",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "remarks",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "pdsEnrollment",
+            "otherEntityRelationshipName": "enrolledTo",
+            "relationshipName": "pdsEnrollment"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "pdsSchedule",
+            "relationshipName": "user",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "profDevService",
+            "otherEntityRelationshipName": "pdsSchedule",
+            "relationshipValidateRules": "required",
+            "relationshipName": "profDevService",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20191124143609",
+    "javadoc": "The PdsSchedule entity.\\n@author Shreekantha",
+    "entityTableName": "pds_schedule",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,88 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-alumni-req-or-claim-heading">Update Request Or Claim status</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <!-- <div class="form-group">
+                    <label class="form-control-label" for="field_requestFor">Request For</label>
+                    <input type="text" class="form-control" name="requestFor" id="field_requestFor"
+                           formControlName="requestFor"/>
+                </div> -->
+                <div class="form-group">
+                        <label class="form-control-label" for="field_subject">Subject</label>
+                        <select readonly class="form-control" id="field_subject" name="subject" formControlName="subjectId">
+                            <option *ngIf="!editForm.get('subjectId').value" [ngValue]="null" selected></option>
+                            <option [ngValue]="reqOrClaimSubjectOption.id" *ngFor="let reqOrClaimSubjectOption of reqorclaimsubjects; trackBy: trackReqOrClaimSubjectById">{{reqOrClaimSubjectOption.name}}</option>
+                        </select>
+                    </div>
+                    <div *ngIf="editForm.get('subjectId').invalid && (editForm.get('subjectId').dirty || editForm.get('subjectId').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('subjectId').errors.required">
+                            This field is required.
+                        </small>
+                    </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_reason">Reason</label>
+                    <input readonly type="text" class="form-control" name="reason" id="field_reason"
+                           formControlName="reason"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_status">Status</label>
+                    <select class="form-control" name="status" formControlName="status" id="field_status">
+                        <option readonly value="SUBMITTED">SUBMITTED</option>
+                        <option value="PROCESSING">PROCESSING</option>
+                        <option value="ISSUED">ISSUED</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_requestedDate">Requested Date</label>
+                    <div class="d-flex">
+                        <input readonly id="field_requestedDate" type="datetime-local" class="form-control" name="requestedDate" formControlName="requestedDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_requestBy">Request By</label>
+                    <select class="form-control" id="field_requestBy" name="requestBy" formControlName="requestById" readonly>
+                        <option *ngIf="!editForm.get('requestById').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.firstName}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('requestById').invalid && (editForm.get('requestById').dirty || editForm.get('requestById').touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('requestById').errors.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_assignee">Request To</label>
+                    <select readonly class="form-control" id="field_assignee" name="assignee" formControlName="assigneeId">
+                        <option *ngIf="!editForm.get('assigneeId').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.firstName}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('assigneeId').invalid && (editForm.get('assigneeId').dirty || editForm.get('assigneeId').touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('assigneeId').errors.required">
+                        This field is required.
+                    </small>
+                </div>
+               
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

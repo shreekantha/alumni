@@ -1,0 +1,108 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-alumni-meet-req-heading">Alumni Meet Request</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_topic">Topic</label>
+                    <select class="form-control" id="field_topic" name="topic" formControlName="topicId">
+                        <option *ngIf="!editForm.get('topicId').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="meetReqTopicOption.id" *ngFor="let meetReqTopicOption of meetreqtopics; trackBy: trackMeetReqTopicById">{{meetReqTopicOption.name}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('topicId').invalid && (editForm.get('topicId').dirty || editForm.get('topicId').touched)">
+                    <small class="form-text text-danger" *ngIf="editForm.get('topicId').errors.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_aspiredRole">Aspired Role</label>
+                    <select class="form-control" id="field_aspiredRole" name="aspiredRole" formControlName="aspiredRoleId">
+                        <option *ngIf="!editForm.get('aspiredRoleId').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="aspiredRoleOption.id" *ngFor="let aspiredRoleOption of aspiredroles; trackBy: trackAspiredRoleById">{{aspiredRoleOption.name}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('aspiredRoleId').invalid && (editForm.get('aspiredRoleId').dirty || editForm.get('aspiredRoleId').touched)">
+                    <small class="form-text text-danger" *ngIf="editForm.get('aspiredRoleId').errors.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_aboutMe">About Me</label>
+                    <input type="text" class="form-control" name="aboutMe" id="field_aboutMe" formControlName="aboutMe" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description" formControlName="description" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_requestTo">Request To Meet</label>
+                    <select class="form-control" id="field_requestTo" name="requestTo" formControlName="requestToId">
+                        <option *ngIf="!editForm.get('requestToId').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.firstName}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('requestToId').invalid && (editForm.get('requestToId').dirty || editForm.get('requestToId').touched)">
+                    <small class="form-text text-danger" *ngIf="editForm.get('requestToId').errors.required">
+                        This field is required.
+                    </small>
+                </div>
+                <!-- <div class="form-group">
+                    <label class="form-control-label" for="field_status">Status</label>
+                    <select class="form-control" name="status" formControlName="status" id="field_status">
+                        <option value="REQUESTED">REQUESTED</option>
+                        <option value="ACCEPTED">ACCEPTED</option>
+                    </select>
+                </div> -->
+
+                <!-- <div class="form-group">
+                    <label class="form-control-label" for="field_requestBy">Request By</label>
+                    <select class="form-control" id="field_requestBy" name="requestBy" formControlName="requestById">
+                        <option *ngIf="!editForm.get('requestById').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.firstName}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('requestById').invalid && (editForm.get('requestById').dirty || editForm.get('requestById').touched)">
+                    <small class="form-text text-danger" *ngIf="editForm.get('requestById').errors.required">
+                        This field is required.
+                    </small>
+                </div> -->
+
+
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_document">Document</label>
+                    <div>
+                        <div *ngIf="editForm.get('document').value" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(editForm.get('documentContentType').value, editForm.get('document').value)">open</a><br>
+                            <span class="pull-left">{{editForm.get('documentContentType').value}},
+                                {{byteSize(editForm.get('document').value)}}</span>
+                            <button type="button" (click)="editForm.patchValue({document: null});editForm.patchValue({documentContentType: null});"
+                                class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_document" (change)="setFileData($event, 'document', false)" />
+                    </div>
+                    <input type="hidden" class="form-control" name="document" id="field_document" formControlName="document" />
+                    <input type="hidden" class="form-control" name="documentContentType" id="field_documentContentType"
+                        formControlName="documentContentType" />
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

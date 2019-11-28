@@ -1,39 +1,4 @@
-import {
-  faUser,
-  faSort,
-  faSortUp,
-  faSortDown,
-  faSync,
-  faEye,
-  faBan,
-  faTimes,
-  faArrowLeft,
-  faSave,
-  faPlus,
-  faPencilAlt,
-  faBars,
-  faThList,
-  faUserPlus,
-  faRoad,
-  faTachometerAlt,
-  faHeart,
-  faList,
-  faBell,
-  faBook,
-  faHdd,
-  faFlag,
-  faWrench,
-  faLock,
-  faCloud,
-  faSignOutAlt,
-  faSignInAlt,
-  faCalendarAlt,
-  faSearch,
-  faTrashAlt,
-  faAsterisk,
-  faTasks,
-  faHome
-} from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faAsterisk, faBan, faBars, faBell, faBook, faCalendarAlt, faCloud, faEye, faFlag, faHdd, faHeart, faHome, faList, faLock, faMemory, faMoneyBill, faPencilAlt, faPlus, faProcedures, faProjectDiagram, faRoad, faRobot, faSave, faSearch, faSignInAlt, faSignOutAlt, faSort, faSortDown, faSortUp, faSync, faTable, faTachometerAlt, faTasks, faThList, faThumbsDown, faThumbsUp, faTimes, faTrashAlt, faUser, faUserPlus, faWrench } from '@fortawesome/free-solid-svg-icons';
 
 export const fontAwesomeIcons = [
   faUser,
@@ -69,5 +34,15 @@ export const fontAwesomeIcons = [
   faCalendarAlt,
   faSearch,
   faTrashAlt,
-  faAsterisk
+  faAsterisk,
+  faThumbsUp,
+  faThumbsDown,
+  faProjectDiagram,
+  faTimes,
+  faTable,
+  faMoneyBill,
+  faPlus,
+  faRobot,
+  faProcedures,
+  faMemory
 ];

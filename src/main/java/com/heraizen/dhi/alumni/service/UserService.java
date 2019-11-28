@@ -1,14 +1,13 @@
 package com.heraizen.dhi.alumni.service;
 
-import com.heraizen.dhi.alumni.config.Constants;
-import com.heraizen.dhi.alumni.domain.Authority;
-import com.heraizen.dhi.alumni.domain.User;
-import com.heraizen.dhi.alumni.repository.AuthorityRepository;
-import com.heraizen.dhi.alumni.repository.UserRepository;
-import com.heraizen.dhi.alumni.security.AuthoritiesConstants;
-import com.heraizen.dhi.alumni.security.SecurityUtils;
-import com.heraizen.dhi.alumni.service.dto.UserDTO;
-import com.heraizen.dhi.alumni.service.util.RandomUtil;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,10 +18,15 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.*;
-import java.util.stream.Collectors;
+import com.heraizen.dhi.alumni.config.Constants;
+import com.heraizen.dhi.alumni.domain.Authority;
+import com.heraizen.dhi.alumni.domain.User;
+import com.heraizen.dhi.alumni.repository.AuthorityRepository;
+import com.heraizen.dhi.alumni.repository.UserRepository;
+import com.heraizen.dhi.alumni.security.AuthoritiesConstants;
+import com.heraizen.dhi.alumni.security.SecurityUtils;
+import com.heraizen.dhi.alumni.service.dto.UserDTO;
+import com.heraizen.dhi.alumni.service.util.RandomUtil;
 
 /**
  * Service class for managing users.
@@ -246,9 +250,11 @@ public class UserService {
             });
     }
 
-    public Page<UserDTO> getAllManagedUsers(Pageable pageable) {
-        return userRepository.findAllByLoginNot(pageable, Constants.ANONYMOUS_USER).map(UserDTO::new);
+    public Page<UserDTO> getAllManagedUsers(String role,Pageable pageable) {
+        return userRepository.findAllByRole(role,pageable).map(UserDTO::new);
     }
+    
+    
 
     public Optional<User> getUserWithAuthoritiesByLogin(String login) {
         return userRepository.findOneByLogin(login);

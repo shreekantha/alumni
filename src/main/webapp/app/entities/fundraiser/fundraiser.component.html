@@ -1,0 +1,96 @@
+<div>
+    <h2 id="page-heading">
+        <span>Fundraisers</span>
+        <button *jhiHasAnyAuthority="'ROLE_ADMIN'"  id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-fundraiser"
+            [routerLink]="['/fundraiser/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span>
+                Fundraiser
+            </span>
+        </button>
+    </h2>
+    <jhi-alert-error></jhi-alert-error> 
+    <jhi-alert></jhi-alert>
+    <br />
+    <div class="alert alert-warning" *ngIf="fundraisers?.length === 0">
+        <span>No fundraisers found</span>
+    </div>
+    <div class="table-responsive" *ngIf="fundraisers?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                    <!-- <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
+                    <th scope="col" jhiSortBy="name"><span>Name</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="description"><span>Description</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="targetAmount"><span>Target Amount</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="collectedAmount"><span>Collected Amount</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="lastDateToContribute"><span>Last Date To Contribute</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="status"><span>Status</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let fundraiser of fundraisers ;trackBy: trackId">
+                    <!-- <td><a [routerLink]="['/fundraiser', fundraiser.id, 'view' ]">{{fundraiser.id}}</a></td> -->
+                    <td>{{fundraiser.name}}</td>
+                    <td>{{fundraiser.description}}</td>
+                    <td>{{fundraiser.targetAmount}}</td>
+                    <td>{{fundraiser.collectedAmount}}</td>
+                    <td>{{fundraiser.lastDateToContribute | date:'mediumDate'}}</td>
+                    <td>{{fundraiser.status}}</td>
+                    <td class="text-right">
+                        <div *jhiHasAnyAuthority="'ROLE_ADMIN'" class="btn-group">
+                            <button type="submit" [routerLink]="['/fundraiser', fundraiser.id, 'view' ]" class="btn btn-info btn-sm">
+                                <fa-icon [icon]="'eye'"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+                            <button type="submit" [routerLink]="['/fundraiser', fundraiser.id, 'edit']" class="btn btn-primary btn-sm">
+                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+                            <button type="submit" [routerLink]="['/fundraiser', { outlets: { popup: fundraiser.id + '/delete'} }]"
+                                replaceUrl="true" queryParamsHandling="merge" class="btn btn-danger btn-sm">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="button" (click)="navToFundContributors(fundraiser.id)"
+                            class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View Contributors</span>
+                        </button>
+                        <div *ngIf="fundraiser.status=='YET_TO_ACHIEVE'">
+
+                            <button  *jhiHasAnyAuthority="'ROLE_ALUMNI'" type="button"
+                            (click)="navToFundContribution(fundraiser.id)" class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">Contribute</span>
+                        </button>
+                    </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div [hidden]="fundraisers?.length === 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5"
+                [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

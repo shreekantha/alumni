@@ -1,0 +1,84 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-fund-contribution-heading">Create or edit a Fund Contribution</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_currency">Currency</label>
+                    <select class="form-control" name="currency" formControlName="currency" id="field_currency">
+                        <option value="INR">INR</option>
+                        <option value="USD">USD</option>
+                    </select>
+                    <div *ngIf="editForm.get('currency').invalid && (editForm.get('currency').dirty || editForm.get('currency').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('currency').errors.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_contrAmount">Contr Amount</label>
+                    <input type="number" class="form-control" name="contrAmount" id="field_contrAmount"
+                           formControlName="contrAmount"/>
+                    <div *ngIf="editForm.get('contrAmount').invalid && (editForm.get('contrAmount').dirty || editForm.get('contrAmount').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('contrAmount').errors.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('contrAmount')?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <!-- <div class="form-group">
+                    <label class="form-control-label" for="field_contrDate">Contr Date</label>
+                    <div class="d-flex">
+                        <input id="field_contrDate" type="datetime-local" class="form-control" name="contrDate" formControlName="contrDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div> -->
+
+                <!-- <div class="form-group">
+                    <label class="form-control-label" for="field_contibutor">Contibutor</label>
+                    <select class="form-control" id="field_contibutor" name="contibutor" formControlName="contibutorId">
+                        <option *ngIf="!editForm.get('contibutorId').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.firstName}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('contibutorId').invalid && (editForm.get('contibutorId').dirty || editForm.get('contibutorId').touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('contibutorId').errors.required">
+                        This field is required.
+                    </small>
+                </div> -->
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fundraiser">Fundraiser</label>
+                    <select class="form-control " readonly  id="field_fundraiser" name="fundraiser" formControlName="fundraiserId">
+                        <option *ngIf="!editForm.get('fundraiserId').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="fundraiserOption.id" *ngFor="let fundraiserOption of fundraisers; trackBy: trackFundraiserById">{{fundraiserOption.name}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('fundraiserId').invalid && (editForm.get('fundraiserId').dirty || editForm.get('fundraiserId').touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('fundraiserId').errors.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

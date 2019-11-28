@@ -1,13 +1,13 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
-import { throwError } from 'rxjs';
-
-import { DhiAlumniTestModule } from '../../../test.module';
-import { AccountService } from 'app/core/auth/account.service';
-import { Account } from 'app/core/user/account.model';
 import { SettingsComponent } from 'app/account/settings/settings.component';
+import { AccountService } from 'app/core/auth/account.service';
 import { JhiTrackerService } from 'app/core/tracker/tracker.service';
+import { Account } from 'app/core/user/account.model';
+import { throwError } from 'rxjs';
 import { MockTrackerService } from '../../../helpers/mock-tracker.service';
+import { DhiAlumniTestModule } from '../../../test.module';
+
 
 describe('Component Tests', () => {
   describe('SettingsComponent', () => {
@@ -40,6 +40,7 @@ describe('Component Tests', () => {
     it('should send the current identity upon save', () => {
       // GIVEN
       const accountValues: Account = {
+
         firstName: 'John',
         lastName: 'Doe',
 

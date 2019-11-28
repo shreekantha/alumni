@@ -1,0 +1,170 @@
+
+/**
+ * The ProfDevService entity.
+ * @author Shreekantha
+ */
+entity ProfDevService {
+    name String required,
+    description String
+}
+/**
+ * The PdsCourse entity.
+ * @author Shreekantha 
+ */
+entity PdsCourse {
+    courseName String required,
+    description String
+}
+/**
+ * The PdsCourseTopic entity.
+ * @author Shreekantha
+ */
+entity PdsCourseTopic {
+    name String,
+    description String,
+    duration Duration
+}
+/**
+ * The PdsSchedule entity.
+ * @author Shreekantha
+ */
+entity PdsSchedule {
+	
+    duration Duration required,
+    date LocalDate required,
+    time Instant required,
+    venue String required,
+    remarks String
+}
+
+/**
+ * The PdsEnrollment entity.
+ * @author Shreekantha
+ */
+entity PdsEnrollment {
+   remarks String
+}
+
+
+/**
+ * The Fundraiser entity.
+ * @author Shreekantha
+ */
+entity Fundraiser {
+    name String required,
+    description String,
+    targetAmount Double required,
+    collectedAmount Double,
+    lastDateToContribute LocalDate,
+    status FundraiseStatus
+}
+enum FundraiseStatus {
+    ACHIEVED, YET_TO_ACHIEVE
+}
+/**
+ * The FundContribution entity.
+ * @author Shreekantha
+ */
+entity FundContribution  {
+    currency Currency required,
+    contrAmount Double required,
+    contrDate Instant
+}
+enum Currency {
+    INR, USD
+}
+/**
+ * The ReqOrClaimSubject entity.
+ * @author Shreekantha
+ */
+entity ReqOrClaimSubject {
+    name String,
+    decsription String
+}
+/**
+ * The AlumniRequest entity.
+ * @author Shreekantha
+ */
+entity AlumniReqOrClaim {
+    requestFor String,
+    reason String,
+    status ReqOrClaimStatus
+    requestedDate Instant
+}
+enum ReqOrClaimStatus {
+    SUBMITTED, PROCESSING, ISSUED
+}
+/**
+ * The AlumniMeetRequest entity.
+ * @author Shreekantha
+ */
+entity AlumniMeetReq {
+    aboutMe String,
+   	description String,
+    document AnyBlob,
+    status AlumniMeetReqStatus
+}
+
+enum AlumniMeetReqStatus{
+REQUESTED, ACCEPTED
+}
+
+/**
+*The MeetReqTopic entity.
+*@author Shreekantha
+*/
+entity MeetReqTopic{
+name String required,
+description String
+
+}
+
+/**
+*The ApiredRole entity.
+*@author Shreekantha
+*/
+entity AspiredRole{
+name String required,
+description String
+
+}
+
+/**
+ * One to many relationship.
+ */
+relationship OneToMany {
+    Fundraiser to FundContribution{fundraiser(name) required}
+    ProfDevService to PdsCourse{profDevService(name) required}
+    PdsCourse to PdsCourseTopic{pdsCourse(courseName) required}
+    ProfDevService to PdsSchedule{profDevService(name) required}
+    ReqOrClaimSubject to AlumniReqOrClaim{subject(name) required}
+    MeetReqTopic to AlumniMeetReq{topic(name) required}
+    AspiredRole to AlumniMeetReq{aspiredRole(name) required}
+   	PdsSchedule to PdsEnrollment{enrolledTo(profDevService) required}
+   
+}
+
+/**
+ * Many to one relationship.
+ */
+relationship ManyToOne {
+    FundContribution{contibutor(firstName) required} to User
+    AlumniReqOrClaim{requestBy(firstName) required} to User
+    AlumniReqOrClaim{assignee(firstName) required} to User
+    AlumniMeetReq{requestBy(firstName) required} to User
+ 	AlumniMeetReq{requestTo(firstName) required} to User
+    PdsEnrollment{enrolledBy(firstName) required} to User
+}
+
+/**
+ * Many to one relationship.
+ */
+relationship ManyToMany {
+    PdsSchedule to User
+}
+
+
+service * with serviceImpl
+dto * with mapstruct
+paginate * with pagination
+filter *

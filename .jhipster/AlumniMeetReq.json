@@ -1,0 +1,68 @@
+{
+    "name": "AlumniMeetReq",
+    "fields": [
+        {
+            "fieldName": "aboutMe",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "document",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "AlumniMeetReqStatus",
+            "fieldValues": "REQUESTED,ACCEPTED"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "alumniMeetReq",
+            "relationshipValidateRules": "required",
+            "relationshipName": "requestBy",
+            "otherEntityField": "firstName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "alumniMeetReq",
+            "relationshipValidateRules": "required",
+            "relationshipName": "requestTo",
+            "otherEntityField": "firstName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "meetReqTopic",
+            "otherEntityRelationshipName": "alumniMeetReq",
+            "relationshipValidateRules": "required",
+            "relationshipName": "topic",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "aspiredRole",
+            "otherEntityRelationshipName": "alumniMeetReq",
+            "relationshipValidateRules": "required",
+            "relationshipName": "aspiredRole",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20191124143614",
+    "javadoc": "The AlumniMeetRequest entity.\\n@author Shreekantha",
+    "entityTableName": "alumni_meet_req",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

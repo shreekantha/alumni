@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="pdsEnrollment">
+            <h2><span>Pds Enrollment</span> {{pdsEnrollment.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Remarks</span></dt>
+                <dd>
+                    <span>{{pdsEnrollment.remarks}}</span>
+                </dd>
+                <dt><span>Enrolled By</span></dt>
+                <dd>
+                    {{pdsEnrollment.enrolledByFirstName}}
+                </dd>
+                <dt><span>Enrolled To</span></dt>
+                <dd>
+                    <div *ngIf="pdsEnrollment.enrolledToId">
+                        <a [routerLink]="['/pds-schedule', pdsEnrollment.enrolledToId, 'view']">{{pdsEnrollment.enrolledToId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/pds-enrollment', pdsEnrollment.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

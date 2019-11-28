@@ -1,0 +1,124 @@
+<div>
+    <h2 id="page-heading">
+        <span>Process Alumni Meet Requests</span>
+        <!-- <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-alumni-meet-req" [routerLink]="['/alumni-meet-req/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create a new Alumni Meet Req
+            </span>
+        </button> -->
+    </h2>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <br />
+    <div class="alert alert-warning" *ngIf="alumniMeetReqs?.length === 0">
+        <span>No alumniMeetReqs found</span>
+    </div>
+    <div class="table-responsive" *ngIf="alumniMeetReqs?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                    <!-- <th scope="col" jhiSortBy="id"><span>ID</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th> -->
+                    <th scope="col" jhiSortBy="topicName"><span>Topic</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="aspiredRoleName"><span>Aspired Role</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="aboutMe"><span>About Me</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="description"><span>Description</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="document"><span>Document</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+
+                    <th scope="col" jhiSortBy="requestByFirstName"><span>Request By</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="status"><span>Status</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <!-- <th scope="col" jhiSortBy="requestToFirstName"><span>Request To</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th> -->
+
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let alumniMeetReq of alumniMeetReqs ;trackBy: trackId">
+                    <!-- <td><a [routerLink]="['/alumni-meet-req', alumniMeetReq.id, 'view' ]">{{alumniMeetReq.id}}</a></td> -->
+                    <td>
+                        <div *ngIf="alumniMeetReq.topicId">
+                            <a [routerLink]="['/meet-req-topic', alumniMeetReq.topicId , 'view' ]">{{alumniMeetReq.topicName}}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="alumniMeetReq.aspiredRoleId">
+                            <a [routerLink]="['/aspired-role', alumniMeetReq.aspiredRoleId , 'view' ]">{{alumniMeetReq.aspiredRoleName}}</a>
+                        </div>
+                    </td>
+                    <td>{{alumniMeetReq.aboutMe}}</td>
+                    <td>{{alumniMeetReq.description}}</td>
+                    <td>
+                        <a *ngIf="alumniMeetReq.document" (click)="openFile(alumniMeetReq.documentContentType, alumniMeetReq.document)">open</a>
+                        <span *ngIf="alumniMeetReq.document">{{alumniMeetReq.documentContentType}},
+                            {{byteSize(alumniMeetReq.document)}}</span>
+                    </td>
+                    <td>
+                        {{alumniMeetReq.requestByFirstName}}
+                    </td>
+                    <td>{{alumniMeetReq.status}}</td>
+                    <!-- <td>
+                        {{alumniMeetReq.requestToFirstName}}
+                    </td> -->
+
+                    <td class="text-right">
+                        <button *ngIf="alumniMeetReq.status=='ACCEPTED' || alumniMeetReq.status=='REJECTED'" type="submit"
+                            [routerLink]="['/alumni-meet-req', alumniMeetReq.id, 'view' ]" class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <div class="btn-group" *ngIf="alumniMeetReq.status=='REQUESTED'">
+                            <button type="button" (click)="accept(alumniMeetReq)" class="btn btn-info btn-sm">
+                                <fa-icon [icon]="'thumbs-up'"></fa-icon>
+                                <span class="d-none d-md-inline">Accept</span>
+                            </button>
+                            <button type="button" (click)="reject(alumniMeetReq)" class="btn btn-danger btn-sm">
+                                <fa-icon [icon]="'thumbs-down'"></fa-icon>
+                                <span class="d-none d-md-inline">Reject</span>
+                            </button>
+                            <!-- <button type="submit" [routerLink]="['/alumni-meet-req', alumniMeetReq.id, 'view' ]" class="btn btn-info btn-sm">
+                                <fa-icon [icon]="'eye'"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+                            <button type="submit" [routerLink]="['/alumni-meet-req', alumniMeetReq.id, 'edit']" class="btn btn-primary btn-sm">
+                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+                            <button type="submit" [routerLink]="['/alumni-meet-req', { outlets: { popup: alumniMeetReq.id + '/delete'} }]"
+                                replaceUrl="true" queryParamsHandling="merge" class="btn btn-danger btn-sm">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button> -->
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div [hidden]="alumniMeetReqs?.length === 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5"
+                [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="pdsSchedule">
+            <h2><span>Pds Schedule</span> {{pdsSchedule.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Duration</span></dt>
+                <dd>
+                    <span>{{pdsSchedule.duration}}</span>
+                </dd>
+                <dt><span>Date</span></dt>
+                <dd>
+                    <span>{{pdsSchedule.date}}</span>
+                </dd>
+                <dt><span>Time</span></dt>
+                <dd>
+                    <span>{{pdsSchedule.time}}</span>
+                </dd>
+                <dt><span>Venue</span></dt>
+                <dd>
+                    <span>{{pdsSchedule.venue}}</span>
+                </dd>
+                <dt><span>Remarks</span></dt>
+                <dd>
+                    <span>{{pdsSchedule.remarks}}</span>
+                </dd>
+                <dt><span>User</span></dt>
+                <dd>
+                    <span *ngFor="let user of pdsSchedule.users; let last = last">
+                        {{user.id}}{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span>Prof Dev Service</span></dt>
+                <dd>
+                    <div *ngIf="pdsSchedule.profDevServiceId">
+                        <a [routerLink]="['/prof-dev-service', pdsSchedule.profDevServiceId, 'view']">{{pdsSchedule.profDevServiceName}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="button"
+                    [routerLink]="['/pds-schedule', pdsSchedule.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

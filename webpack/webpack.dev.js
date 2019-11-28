@@ -20,13 +20,13 @@ module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
         contentBase: './build/resources/main/static/',
         proxy: [{
             context: [
-                '/api',
-                '/services',
-                '/management',
-                '/swagger-resources',
-                '/v2/api-docs',
-                '/h2-console',
-                '/auth'
+                '/dhialumni/api',
+                '/dhialumni/services',
+                '/dhialumni/management',
+                '/dhialumni/swagger-resources',
+                '/dhialumni/v2/api-docs',
+                '/dhialumni/h2-console',
+                '/dhialumni/auth'
             ],
             target: `http${options.tls ? 's' : ''}://localhost:8080`,
             secure: false,

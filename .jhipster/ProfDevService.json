@@ -1,0 +1,41 @@
+{
+    "name": "ProfDevService",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "pdsCourse",
+            "otherEntityRelationshipName": "profDevService",
+            "relationshipName": "pdsCourse"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "pdsSchedule",
+            "otherEntityRelationshipName": "profDevService",
+            "relationshipName": "pdsSchedule"
+        }
+    ],
+    "changelogDate": "20191124143606",
+    "javadoc": "The ProfDevService entity.\\n@author Shreekantha",
+    "entityTableName": "prof_dev_service",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}
