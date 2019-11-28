@@ -60,6 +60,8 @@ export class AccountService {
             this.userIdentity = account;
             console.error('account identity ', account.id)
             sessionStorage.setItem('user-id', account.id);
+            sessionStorage.setItem('name', account.firstName)
+            sessionStorage.setItem('role',account.authorities[0])
             this.authenticated = true;
             this.trackerService.connect();
           } else {
@@ -93,5 +95,13 @@ export class AccountService {
 
   static getUserId(): string {
     return sessionStorage.getItem('user-id');
+  }
+
+  static getUsername() {
+    return sessionStorage.getItem('name');
+  }
+
+  static getRole(){
+    return sessionStorage.getItem('role');
   }
 }

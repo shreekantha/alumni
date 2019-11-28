@@ -67,7 +67,7 @@ public class AlumniReqOrClaimResource {
 	AlumniReqOrClaimDTO result = alumniReqOrClaimService.save(alumniReqOrClaimDTO);
 	return ResponseEntity
 		.created(new URI("/api/alumni-req-or-claims/" + result.getId())).headers(HeaderUtil
-			.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getSubjectName().toString()))
+			.createEntityCreationAlert(applicationName, false, ENTITY_NAME, ""))
 		.body(result);
     }
 
@@ -91,7 +91,7 @@ public class AlumniReqOrClaimResource {
 	}
 	AlumniReqOrClaimDTO result = alumniReqOrClaimService.save(alumniReqOrClaimDTO);
 	return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME,
-		alumniReqOrClaimDTO.getSubjectName().toString())).body(result);
+		"")).body(result);
     }
 
     /**

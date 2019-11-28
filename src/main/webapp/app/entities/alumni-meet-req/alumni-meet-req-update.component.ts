@@ -60,7 +60,9 @@ export class AlumniMeetReqUpdateComponent implements OnInit {
       this.updateForm(alumniMeetReq);
     });
     this.userService
-      .query()
+      .query({
+        'role':'ROLE_ALUMNI'
+      })
       .subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body), (res: HttpErrorResponse) => this.onError(res.message));
     this.meetReqTopicService
       .query()

@@ -26,7 +26,7 @@ public class PdsSchedule implements Serializable {
 
     @NotNull
     @Field("duration")
-    private Duration duration;
+    private String duration;
 
     @NotNull
     @Field("date")
@@ -34,7 +34,7 @@ public class PdsSchedule implements Serializable {
 
     @NotNull
     @Field("time")
-    private Instant time;
+    private String time;
 
     @NotNull
     @Field("venue")
@@ -65,16 +65,16 @@ public class PdsSchedule implements Serializable {
         this.id = id;
     }
 
-    public Duration getDuration() {
+    public String getDuration() {
         return duration;
     }
 
-    public PdsSchedule duration(Duration duration) {
+    public PdsSchedule duration(String duration) {
         this.duration = duration;
         return this;
     }
 
-    public void setDuration(Duration duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
 
@@ -91,16 +91,16 @@ public class PdsSchedule implements Serializable {
         this.date = date;
     }
 
-    public Instant getTime() {
+    public String getTime() {
         return time;
     }
 
-    public PdsSchedule time(Instant time) {
+    public PdsSchedule time(String time) {
         this.time = time;
         return this;
     }
 
-    public void setTime(Instant time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

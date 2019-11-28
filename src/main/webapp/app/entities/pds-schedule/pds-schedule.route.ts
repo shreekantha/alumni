@@ -33,7 +33,7 @@ export const pdsScheduleRoute: Routes = [
       pagingParams: JhiResolvePagingParams
     },
     data: {
-      authorities: ['ROLE_USER','ROLE_ALUMNI'],
+      authorities: ['ROLE_USER','ROLE_ALUMNI','ROLE_FACULTY'],
       defaultSort: 'id,asc',
       pageTitle: 'PdsSchedules'
     },

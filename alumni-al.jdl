@@ -1,0 +1,21 @@
+
+
+entity Alumni{
+usn String,
+name String,
+email String,
+mobile String,
+degree String,
+specialization String,
+jobPosition String,
+company String,
+yearOfGraduation String,
+experience Double
+
+}
+
+
+
+service * with serviceImpl
+dto * with mapstruct
+paginate * with pagination

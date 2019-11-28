@@ -1,10 +1,10 @@
-import { Moment } from 'moment';
-import { IPdsEnrollment } from 'app/shared/model/pds-enrollment.model';
 import { IUser } from 'app/core/user/user.model';
+import { IPdsEnrollment } from 'app/shared/model/pds-enrollment.model';
+import { Moment } from 'moment';
 
 export interface IPdsSchedule {
   id?: string;
-  duration?: number;
+  duration?: any;
   date?: Moment;
   time?: Moment;
   venue?: string;
@@ -18,7 +18,7 @@ export interface IPdsSchedule {
 export class PdsSchedule implements IPdsSchedule {
   constructor(
     public id?: string,
-    public duration?: number,
+    public duration?: any,
     public date?: Moment,
     public time?: Moment,
     public venue?: string,

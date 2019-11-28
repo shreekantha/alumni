@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import * as moment from 'moment';
+import { Injectable } from '@angular/core';
+import { SERVER_API_URL } from 'app/app.constants';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { DATE_FORMAT } from 'app/shared/constants/input.constants';
+import { IPdsSchedule } from 'app/shared/model/pds-schedule.model';
+import { createRequestOption } from 'app/shared/util/request-util';
+import * as moment from 'moment';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { SERVER_API_URL } from 'app/app.constants';
-import { createRequestOption } from 'app/shared/util/request-util';
-import { IPdsSchedule } from 'app/shared/model/pds-schedule.model';
 
 type EntityResponseType = HttpResponse<IPdsSchedule>;
 type EntityArrayResponseType = HttpResponse<IPdsSchedule[]>;
@@ -53,7 +53,7 @@ export class PdsScheduleService {
   protected convertDateFromClient(pdsSchedule: IPdsSchedule): IPdsSchedule {
     const copy: IPdsSchedule = Object.assign({}, pdsSchedule, {
       date: pdsSchedule.date != null && pdsSchedule.date.isValid() ? pdsSchedule.date.format(DATE_FORMAT) : null,
-      time: pdsSchedule.time != null && pdsSchedule.time.isValid() ? pdsSchedule.time.toJSON() : null
+    //  time: pdsSchedule.time != null && pdsSchedule.time.isValid() ? pdsSchedule.time.toJSON() : null
     });
     return copy;
   }
@@ -61,7 +61,7 @@ export class PdsScheduleService {
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
       res.body.date = res.body.date != null ? moment(res.body.date) : null;
-      res.body.time = res.body.time != null ? moment(res.body.time) : null;
+     // res.body.time = res.body.time != null ? moment(res.body.time) : null;
     }
     return res;
   }
@@ -70,7 +70,7 @@ export class PdsScheduleService {
     if (res.body) {
       res.body.forEach((pdsSchedule: IPdsSchedule) => {
         pdsSchedule.date = pdsSchedule.date != null ? moment(pdsSchedule.date) : null;
-        pdsSchedule.time = pdsSchedule.time != null ? moment(pdsSchedule.time) : null;
+       // pdsSchedule.time = pdsSchedule.time != null ? moment(pdsSchedule.time) : null;
       });
     }
     return res;

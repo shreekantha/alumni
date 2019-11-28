@@ -18,13 +18,13 @@ public class PdsScheduleDTO implements Serializable {
     private String id;
 
     @NotNull
-    private Duration duration;
+    private String duration;
 
     @NotNull
     private LocalDate date;
 
     @NotNull
-    private Instant time;
+    private String time;
 
     @NotNull
     private String venue;
@@ -46,11 +46,11 @@ public class PdsScheduleDTO implements Serializable {
         this.id = id;
     }
 
-    public Duration getDuration() {
+    public String getDuration() {
         return duration;
     }
 
-    public void setDuration(Duration duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
 
@@ -62,11 +62,11 @@ public class PdsScheduleDTO implements Serializable {
         this.date = date;
     }
 
-    public Instant getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Instant time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

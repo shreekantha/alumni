@@ -73,10 +73,8 @@ public class PdsEnrollmentResource {
 	}
 	PdsEnrollmentDTO result = pdsEnrollmentService.save(pdsEnrollmentDTO);
 	return ResponseEntity.created(new URI("/api/pds-enrollments/" + result.getId()))
-		.headers(DhiHeaderUtil.createAlert(applicationName,
-			"You have been successfully enrolled to the PDS "
-				+ result.getEnrolledTo().getProfDevServiceName(),
-			result.getEnrolledTo().getProfDevServiceName().toString()))
+		.headers(DhiHeaderUtil.createAlert(applicationName, "You have been successfully enrolled to the PDS Service ",
+			result.getEnrolledTo().getProfDevServiceName()))
 		.body(result);
     }
 

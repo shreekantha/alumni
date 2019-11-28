@@ -51,6 +51,18 @@ import { RouterModule } from '@angular/router';
       {
         path: 'pds-enrollment',
         loadChildren: () => import('./pds-enrollment/pds-enrollment.module').then(m => m.DhiAlumniPdsEnrollmentModule)
+      },
+      {
+        path: 'alumni',
+        loadChildren: () => import('./alumni/alumni.module').then(m => m.DhiAlumniAlumniModule)
+      },
+      {
+        path: 'degree',
+        loadChildren: () => import('./degree/degree.module').then(m => m.DhiAlumniDegreeModule)
+      },
+      {
+        path: 'department',
+        loadChildren: () => import('./department/department.module').then(m => m.DhiAlumniDepartmentModule)
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])

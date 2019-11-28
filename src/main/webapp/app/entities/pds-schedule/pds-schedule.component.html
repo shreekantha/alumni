@@ -37,7 +37,7 @@
                     <th scope="col" jhiSortBy="venue"><span>Venue</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
-                    <th scope="col" jhiSortBy="remarks"><span>Remarks</span>
+                    <th scope="col" jhiSortBy="remarks"><span>Faculty</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
 
@@ -52,11 +52,11 @@
                             <a [routerLink]="['/prof-dev-service', pdsSchedule.profDevServiceId , 'view' ]">{{pdsSchedule.profDevServiceName}}</a>
                         </div>
                     </td>
-                    <td>{{pdsSchedule.duration}}</td>
+                    <td>{{pdsSchedule.duration}} Hrs</td>
                     <td>{{pdsSchedule.date | date:'mediumDate'}}</td>
-                    <td>{{pdsSchedule.time | date:'medium'}}</td>
+                    <td>{{pdsSchedule.time}}</td>
                     <td>{{pdsSchedule.venue}}</td>
-                    <td>{{pdsSchedule.remarks}}</td>
+                    <td><span *ngFor="let user of pdsSchedule.users">{{user.firstName}}</span></td>
 
                     <td class="text-right">
                         <div *jhiHasAnyAuthority="'ROLE_ADMIN'" class="btn-group">

@@ -11,17 +11,14 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_duration">Duration</label>
-                    <input type="number" class="form-control" name="duration" id="field_duration"
-                           formControlName="duration"/>
+                    <input type="text" class="form-control" name="duration" id="field_duration"
+                           formControlName="duration" placeholder="HH:MM"/>
                     <div *ngIf="editForm.get('duration').invalid && (editForm.get('duration').dirty || editForm.get('duration').touched)">
                         <small class="form-text text-danger"
                                *ngIf="editForm.get('duration').errors.required">
                         This field is required.
                         </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.get('duration')?.errors?.number">
-                            This field should be a number.
-                        </small>
+                       
                     </div>
                 </div>
                 <div class="form-group">
@@ -42,7 +39,7 @@
                 <div class="form-group">
                     <label class="form-control-label" for="field_time">Time</label>
                     <div class="d-flex">
-                        <input id="field_time" type="datetime-local" class="form-control" name="time" formControlName="time" placeholder="YYYY-MM-DD HH:mm"/>
+                        <input id="field_time" type="text" class="form-control" name="time" formControlName="time" placeholder="HH:mm AM/PM"/>
                     </div>
                     <div *ngIf="editForm.get('time').invalid && (editForm.get('time').dirty || editForm.get('time').touched)">
                         <small class="form-text text-danger"

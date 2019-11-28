@@ -7,10 +7,8 @@ import { ActivatedRoute } from '@angular/router';
 import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
 import { ProfDevServiceService } from 'app/entities/prof-dev-service/prof-dev-service.service';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { IPdsSchedule, PdsSchedule } from 'app/shared/model/pds-schedule.model';
 import { IProfDevService } from 'app/shared/model/prof-dev-service.model';
-import * as moment from 'moment';
 import { JhiAlertService } from 'ng-jhipster';
 import { Observable } from 'rxjs';
 import { PdsScheduleService } from './pds-schedule.service';
@@ -54,7 +52,7 @@ export class PdsScheduleUpdateComponent implements OnInit {
     });
     this.userService
       .query({
-        role:'ROLE_ALUMNI'
+        role:'ROLE_FACULTY'
       })
       .subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body), (res: HttpErrorResponse) => this.onError(res.message));
     this.profDevServiceService
@@ -70,7 +68,7 @@ export class PdsScheduleUpdateComponent implements OnInit {
       id: pdsSchedule.id,
       duration: pdsSchedule.duration,
       date: pdsSchedule.date,
-      time: pdsSchedule.time != null ? pdsSchedule.time.format(DATE_TIME_FORMAT) : null,
+      time: pdsSchedule.time,
       venue: pdsSchedule.venue,
       remarks: pdsSchedule.remarks,
       users: pdsSchedule.users,
@@ -85,7 +83,6 @@ export class PdsScheduleUpdateComponent implements OnInit {
   save() {
     this.isSaving = true;
     const pdsSchedule = this.createFromForm();
-    pdsSchedule.duration=pdsSchedule.duration*3600;
     if (pdsSchedule.id !== undefined) {
       this.subscribeToSaveResponse(this.pdsScheduleService.update(pdsSchedule));
     } else {
@@ -99,7 +96,7 @@ export class PdsScheduleUpdateComponent implements OnInit {
       id: this.editForm.get(['id']).value,
       duration: this.editForm.get(['duration']).value,
       date: this.editForm.get(['date']).value,
-      time: this.editForm.get(['time']).value != null ? moment(this.editForm.get(['time']).value, DATE_TIME_FORMAT) : undefined,
+      time: this.editForm.get(['time']).value ,
       venue: this.editForm.get(['venue']).value,
       remarks: this.editForm.get(['remarks']).value,
       users: this.editForm.get(['users']).value,

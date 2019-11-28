@@ -20,6 +20,7 @@ export class NavbarComponent implements OnInit {
   modalRef: NgbModalRef;
   version: string;
   isOpen:boolean;
+  name:any;
 
   constructor(
     private loginService: LoginService,
@@ -50,6 +51,7 @@ export class NavbarComponent implements OnInit {
     // } else {
     //   this.applyLeftNav();
     // }
+   
     return loggedin;
   }
 
@@ -72,6 +74,13 @@ export class NavbarComponent implements OnInit {
     return this.isAuthenticated() ? this.accountService.getImageUrl() : null;
   }
 
+  getUser(){
+  return AccountService.getUsername();
+  }
+
+  getRole(){
+    return AccountService.getRole();
+  }
   
   private applyLeftNav() {
     // document.getElementById("main").classList.remove('ml-0');

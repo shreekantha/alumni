@@ -1,0 +1,63 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="alumni">
+            <h2><span>Alumni</span> {{alumni.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Usn</span></dt>
+                <dd>
+                    <span>{{alumni.usn}}</span>
+                </dd>
+                <dt><span>Name</span></dt>
+                <dd>
+                    <span>{{alumni.name}}</span>
+                </dd>
+                <dt><span>Email</span></dt>
+                <dd>
+                    <span>{{alumni.email}}</span>
+                </dd>
+                <dt><span>Mobile</span></dt>
+                <dd>
+                    <span>{{alumni.mobile}}</span>
+                </dd>
+                <dt><span>Degree</span></dt>
+                <dd>
+                    <span>{{alumni.degree}}</span>
+                </dd>
+                <dt><span>Specialization</span></dt>
+                <dd>
+                    <span>{{alumni.specialization}}</span>
+                </dd>
+                <dt><span>Job Position</span></dt>
+                <dd>
+                    <span>{{alumni.jobPosition}}</span>
+                </dd>
+                <dt><span>Company</span></dt>
+                <dd>
+                    <span>{{alumni.company}}</span>
+                </dd>
+                <dt><span>Year Of Graduation</span></dt>
+                <dd>
+                    <span>{{alumni.yearOfGraduation}}</span>
+                </dd>
+                <dt><span>Experience</span></dt>
+                <dd>
+                    <span>{{alumni.experience}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/alumni', alumni.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -66,7 +66,7 @@ public class AlumniMeetReqResource {
 	AlumniMeetReqDTO result = alumniMeetReqService.save(alumniMeetReqDTO);
 	return ResponseEntity
 		.created(new URI("/api/alumni-meet-reqs/" + result.getId())).headers(HeaderUtil
-			.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getTopicName().toString()))
+			.createEntityCreationAlert(applicationName, false, ENTITY_NAME, ""))
 		.body(result);
     }
 
@@ -90,7 +90,7 @@ public class AlumniMeetReqResource {
 	}
 	AlumniMeetReqDTO result = alumniMeetReqService.save(alumniMeetReqDTO);
 	return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME,
-		alumniMeetReqDTO.getId().toString())).body(result);
+		"")).body(result);
     }
 
     /**
